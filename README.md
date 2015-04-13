@@ -1,8 +1,8 @@
 # contextual
 
-A small library for Clojure and ClojureScript providing associatve
+A small library for Clojure and ClojureScript providing associative
 data structures that store metadata about their context in some larger
-data strutcure.
+data structure.
 
 ## Rationale
 
@@ -12,7 +12,7 @@ tree with a function..
 
 Sometimes, it is necessary to know "where" a given node is located
 within the data structure as a whole. For example, this is often the
-case when building a user intervace, so user interaction events can be
+case when building a user interface, so user interaction events can be
 applied back to the same logical location in the tree.
 
 Normally, this requires passing around additional book-keeping
@@ -26,7 +26,7 @@ the full set of persistent map and vector interfaces and are full
 substitutes for Clojure(Script)'s map and vector datatypes.
 
 At any point, an application may query a contextual object for its
-path relative to the root. Retreiving a "child" map or vector from a
+path relative to the root. Retrieving a "child" map or vector from a
 contextual data structure will yield another contextual object, with a
 path reflecting its key or index within its "parent". This is entirely
 seamless and requires no special functions or arguments. Intermediate
@@ -61,7 +61,7 @@ root.
 (c/context root) ;; => []
 ```
 
-Use any of Clojure's built in methods for retreiving nested values:
+Use any of Clojure's built in methods for retrieving nested values:
 
 ```clojure
 (def node (:b (first (root :a))))
@@ -92,8 +92,8 @@ The library is implemented in terms of two protocols:
 `Contextual` indicates a contextual object and supports the `context`
 and `decontextualize` protocol methods.
 
-Two implementations areprovided, `DelegateMap` and
-`DelegateVec`. These wrap maps and vectors (respecively), maintaining
+Two implementations are provided, `DelegateMap` and
+`DelegateVec`. These wrap maps and vectors (respectively), maintaining
 the object's path and delegating operations to the wrapped map or
 vector implementation.
 
