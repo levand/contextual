@@ -37,6 +37,10 @@
     (check (get-in c [:a]))
     (check (second (first (seq c))))))
 
+(deftest emptiness-is-filling-me
+  (is (empty? (c/contextualize {})))
+  (is (empty? (c/contextualize []))))
+
 (deftest contextual-vec-basics
   (let [c (c/contextualize [:foo :bar] [:a :b])]
     (is (= [:a :b] (c/context c)))

@@ -110,7 +110,9 @@
      (assocEx [_ k v] (->DelegateMap (.assocEx delegate k v) path))
 
      clojure.lang.Seqable
-     (seq [_] (map (partial contextual-entry path) (.seq delegate)))
+     (seq [_]
+       (when-let [s (.seq delegate)]
+         (map (partial contextual-entry path) s)))
 
      java.io.Serializable
 
@@ -172,7 +174,9 @@
      (-hash [_] (-hash delegate))
 
      ISeqable
-     (-seq [_] (map (partial contextual-entry path) (-seq delegate)))
+     (-seq [_]
+       (when-let [s (-seq delegate)]
+         (map (partial contextual-entry path) s)))
 
      ILookup
      (-lookup [_ k] (contextual-value path k (-lookup delegate k)))
@@ -239,8 +243,7 @@
      (seq [_]
        (when-let [s (.seq delegate)]
          (map-indexed (fn [i v]
-                        (contextual-value path i v))
-                      (.seq delegate))))
+                        (contextual-value path i v)) s)))
 
      java.io.Serializable
 
