@@ -1,4 +1,4 @@
-(defproject contextual "0.1.0-SNAPSHOT"
+(defproject com.cognitect/contextual "0.1.0-SNAPSHOT"
   :description "Associative values in Clojure and ClojureScript which
   know their context"
   :license {:name "Eclipse Public License"
