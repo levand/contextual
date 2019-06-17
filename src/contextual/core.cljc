@@ -289,7 +289,7 @@
      (isEmpty [_] (.isEmpty delegate))
      (size [_] (.size delegate))
      (toArray [this] (clojure.lang.RT/seqToArray (seq this)))
-     (toArray [this a] (clojure.lang.RT/seqToPassedArray (seq this) a))
+     (^"[Ljava.lang.Object;" toArray [this ^"[Ljava.lang.Object;" a] (clojure.lang.RT/seqToPassedArray (seq this) a))
 
      java.util.List
      (get [_ idx] (contextual-value path idx (.get delegate idx)))
@@ -305,8 +305,8 @@
      (subList [_ from to]
        (->DelegateVec (.subList delegate from to) path))
 
-     java.util.RandomAccess
-     ))
+     java.util.RandomAccess))
+     
 
 #? (:cljs
     (deftype DelegateVec [delegate path]
