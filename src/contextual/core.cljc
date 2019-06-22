@@ -63,7 +63,7 @@
     entry))
 
 #?(:clj
-   (deftype DelegateMap [delegate path]
+   (deftype DelegateMap [^clojure.lang.IPersistentMap delegate path]
      Contextual
      (context [_] path)
      (decontextualize [_] delegate)
@@ -117,7 +117,7 @@
      java.io.Serializable
 
      java.lang.Iterable
-     (iterator [this] (.iterator (seq this)))
+     (iterator [this] (.iterator ^java.lang.Iterable (seq this)))
 
      java.lang.Runnable
      (run [this] (.invoke this))
@@ -198,7 +198,7 @@
 
 #?(:clj
 
-   (deftype DelegateVec [delegate path]
+   (deftype DelegateVec [^clojure.lang.IPersistentVector delegate path]
      Contextual
      (context [_] path)
      (decontextualize [_] delegate)
@@ -248,7 +248,7 @@
      java.io.Serializable
 
      java.lang.Iterable
-     (iterator [this] (.iterator (seq this)))
+     (iterator [this] (.iterator ^java.lang.Iterable (seq this)))
 
      java.lang.Runnable
      (run [this] (.invoke this))
@@ -289,7 +289,7 @@
      (isEmpty [_] (.isEmpty delegate))
      (size [_] (.size delegate))
      (toArray [this] (clojure.lang.RT/seqToArray (seq this)))
-     (toArray [this a] (clojure.lang.RT/seqToPassedArray (seq this) a))
+     (^"[Ljava.lang.Object;" toArray [this ^"[Ljava.lang.Object;" a] (clojure.lang.RT/seqToPassedArray (seq this) a))
 
      java.util.List
      (get [_ idx] (contextual-value path idx (.get delegate idx)))
@@ -299,14 +299,14 @@
        ;; This is quite inefficent, but much easier to
        ;; implement. Should be enough of an edge case that it doesn't
        ;; matter.
-       (.listIterator (vec (seq this))))
+       (.listIterator ^java.util.List (vec (seq this))))
      (listIterator [this i]
-       (.listIterator (vec (seq this)) i))
+       (.listIterator ^java.util.List (vec (seq this)) i))
      (subList [_ from to]
        (->DelegateVec (.subList delegate from to) path))
 
-     java.util.RandomAccess
-     ))
+     java.util.RandomAccess))
+     
 
 #? (:cljs
     (deftype DelegateVec [delegate path]
